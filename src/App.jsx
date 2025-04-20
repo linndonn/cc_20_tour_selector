@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Gallery from "./components/Gallery";
 import DestinationSelector from "./components/DestinationSelector";
@@ -5,19 +6,19 @@ import DestinationSelector from "./components/DestinationSelector";
 const App = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState("null");
   const [selected, setSelected] = useState("All");
   const [allTours, setAllTours] = useState([]);
 
   const fetchTours = async () => {
     setLoading(true);
     try {
-      const res = await fetch("https://course-https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project.com/react-tours-project");
+      const res = await fetch("https://api.allorigins.win/raw?url=https://course-api.com/react-tours-project");
       const data = await res.json();
       setTours(data);
       setAllTours(data);
       setError("");
-    } catch (err) {
+    } catch (error) {
       setError("Error fetching tours.");
     }
     setLoading(false);
@@ -27,12 +28,12 @@ const App = () => {
     fetchTours();
   }, []);
 
-  const removeTour = (id) => {
+  const handleremoveTour = (id) => {
     const newTours = tours.filter((tour) => tour.id !== id);
     setTours(newTours);
   };
 
-  const refreshTours = () => {
+  const handlerefreshTours = () => {
     setTours(allTours);
   };
 
@@ -41,28 +42,23 @@ const App = () => {
     : tours.filter((tour) => tour.name === selected);
 
   return (
-    <div>
-      
-            <h1>An Antiguan Tour of Europe (Tour App Project)</h1>
-            <h2>Tour with us! Options listed in the drop down.</h2>
-            {tours.length === 0 ? (
-                <div className="no-tours">
-               
-    <p>No tours left. Refresh to reload.</p>
-    <button onClick={handleRefresh} className="refresh-btn">
-  Refresh List
-      </button>
-      </div>
-      ) : (
+    <main className="app">
+      <h1>An Antiguan Tour of Europe (Tour Destination Selector)</h1>
+      <h2>Tour with us! Options listed in the drop down.</h2>
       <DestinationSelector
-      tours={tours}
-      onSelectDestination={(destination) => {
-      setFilter(destination);
-      }}
-     onRemove={handleRemoveTour}
-          />
-      )}
-    </div>
-    );
+        tours={allTours}
+        selected={selected}
+        onSelect={setSelected}
+      />
+      <Gallery
+        tours={filteredTours}
+        loading={loading}
+        error={error}
+        onRemove={handleremoveTour}
+        onRefresh={handlerefreshTours}
+      />
+    </main>
+  );
 };
+
 export default App;
