@@ -7,7 +7,7 @@ const App = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("null");
-  const [selected, setSelected] = useState("All");
+  const [selected, setSelected] = useState("");
   const [allTours, setAllTours] = useState([]);
 
   const fetchTours = async () => {

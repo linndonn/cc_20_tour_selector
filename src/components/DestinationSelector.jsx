@@ -10,6 +10,7 @@ const DestinationSelector = ({ tours, selected, onSelect }) => {
   return (
     <div className="destination-selector">
       <select value={selected} onChange={handleChange}>
+      <option value=""></option>
         {uniqueDestinations.map((name) => (
           <option key={name} value={name}>
             {name}
