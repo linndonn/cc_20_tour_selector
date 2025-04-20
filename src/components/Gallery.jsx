@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import TourCard from "./TourCard";
 
 const Gallery = ({ tours, loading, error, onRemove, onRefresh }) => {
