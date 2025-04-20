@@ -7,7 +7,7 @@ const App = () => {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("null");
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState("All");
   const [allTours, setAllTours] = useState([]);
 
   const fetchTours = async () => {
@@ -56,6 +56,7 @@ const App = () => {
         error={error}
         onRemove={handleremoveTour}
         onRefresh={handlerefreshTours}
+        selected={selected} 
       />
     </main>
   );

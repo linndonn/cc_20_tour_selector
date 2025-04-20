@@ -4,7 +4,7 @@ import TourCard from "./TourCard";
 const Gallery = ({ tours, loading, error, onRemove, onRefresh }) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
-  if (tours.length === 0)
+  if (tours.length === 0 && selected)
     return (
       <div>
         <h2>No tours left. Refresh to reload.</h2>
